@@ -35,7 +35,7 @@ class ImageLabelAdapter(private var firebaseVisionList: List<Any>) : RecyclerVie
             itemView.setOnClickListener(View.OnClickListener {
              //   itemView.itemName.text = "clicked"
                 val modifiedLabel = currentItem.label.replace(" ","_")
-                val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://zeen.wikipedia.org/wiki/"+modifiedLabel))
+                val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://en.wikipedia.org/wiki/"+modifiedLabel))
                 startActivity(context,i,null)
 
             })

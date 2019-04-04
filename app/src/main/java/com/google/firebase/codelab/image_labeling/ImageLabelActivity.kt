@@ -65,10 +65,10 @@ class ImageLabelActivity : BaseCameraActivity() {
 //                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {
-                    //  runImageLabeling(bitmap) // if device is not connected to internet
+                      runImageLabeling(bitmap) // if device is not connected to internet
                     // Task failed with an exception
                     // progressBar.visibility = View.GONE
-                    Toast.makeText(baseContext, it.toString(), Toast.LENGTH_LONG).show()
+                   // Toast.makeText(baseContext, it.toString(), Toast.LENGTH_LONG).show()
                 }
     }
 

@@ -18,6 +18,8 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         btnRetry.setOnClickListener {
             if (cameraView.visibility == View.VISIBLE) showPreview() else hidePreview()
+
+
         }
         fab_take_photo.setOnClickListener(this)
         sheetBehavior.peekHeight = 224
@@ -41,6 +43,7 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
     protected fun showPreview() {
         framePreview.visibility = View.VISIBLE
         cameraView.visibility = View.GONE
+
     }
 
     protected fun hidePreview() {

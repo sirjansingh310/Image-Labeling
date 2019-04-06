@@ -53,8 +53,8 @@
             android:paddingBottom="8dp"
             android:textSize="16sp"
             android:visibility="gone"
-            android:background="@color/white"
             android:text="Learn More"
+            android:background="@color/white"
 
         />
 

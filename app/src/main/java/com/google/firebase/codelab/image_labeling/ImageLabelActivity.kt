@@ -61,7 +61,7 @@ class ImageLabelActivity : BaseCameraActivity() {
                     progressBar.visibility = View.GONE
                     itemAdapter.setList(it)
                     /// Fetch Labels
-                    Toast.makeText(baseContext, it.get(0).label, Toast.LENGTH_LONG).show()
+                   // Toast.makeText(baseContext, it.get(0).label, Toast.LENGTH_LONG).show()
 //                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {

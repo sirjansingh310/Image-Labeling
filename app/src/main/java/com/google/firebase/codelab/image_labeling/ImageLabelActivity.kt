@@ -37,7 +37,7 @@ class ImageLabelActivity : BaseCameraActivity() {
                     // Task completed successfully
                     progressBar.visibility = View.GONE
                     itemAdapter.setList(it)
-              //      sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+                    //      sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {
                     // Task failed with an exception
@@ -61,14 +61,14 @@ class ImageLabelActivity : BaseCameraActivity() {
                     progressBar.visibility = View.GONE
                     itemAdapter.setList(it)
                     /// Fetch Labels
-                   // Toast.makeText(baseContext, it.get(0).label, Toast.LENGTH_LONG).show()
+                    // Toast.makeText(baseContext, it.get(0).label, Toast.LENGTH_LONG).show()
 //                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {
-                      runImageLabeling(bitmap) // if device is not connected to internet
+                    runImageLabeling(bitmap) // if device is not connected to internet
                     // Task failed with an exception
                     // progressBar.visibility = View.GONE
-                   // Toast.makeText(baseContext, it.toString(), Toast.LENGTH_LONG).show()
+                    // Toast.makeText(baseContext, it.toString(), Toast.LENGTH_LONG).show()
                 }
     }
 
@@ -83,7 +83,6 @@ class ImageLabelActivity : BaseCameraActivity() {
         cameraView.captureImage { cameraKitImage ->
             // Get the Bitmap from the captured shot
             runCloudImageLabeling(cameraKitImage.bitmap)
-
         }
     }
 

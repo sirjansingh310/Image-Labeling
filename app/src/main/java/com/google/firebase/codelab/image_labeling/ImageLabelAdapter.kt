@@ -17,38 +17,46 @@ import android.net.Uri
 
 class ImageLabelAdapter(private var firebaseVisionList: List<Any>) : RecyclerView.Adapter<ImageLabelAdapter.ItemHolder>() {
     lateinit var context: Context
-
     inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindCloud(currentItem: FirebaseVisionCloudLabel) {
+            val isExpanded = HashMap<String,Boolean>(firebaseVisionList.size)
             itemView.setOnClickListener(View.OnClickListener {
-                //itemView.itemName.text = "clicked"
-                val modifiedLabel = currentItem.label.replace(" ","_")
-                val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://en.wikipedia.org/wiki/"+modifiedLabel))
-                startActivity(context,i,null)
+                if(isExpanded[currentItem.label] == false) {
+                    itemView.wikiInfo.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                    itemView.wikiInfo.visibility = View.VISIBLE
+                    itemView.wikiButton.visibility = View.VISIBLE
+                    isExpanded[currentItem.label] = true
+                    itemView.wikiButton.setOnClickListener {
+                        val modifiedLabel = currentItem.label.replace(" ","_")
+                        val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://en.wikipedia.org/wiki/"+modifiedLabel))
+                        startActivity(context,i,null)
+                    }
+                }
+                else{
+                    itemView.wikiInfo.visibility = View.GONE
+                    itemView.wikiButton.visibility = View.GONE
+                    isExpanded[currentItem.label] = false
+                }
 
             })
+            isExpanded[currentItem.label] = false
             itemView.itemName.text = currentItem.label + "detected on cloud"
             itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
 
         fun bindDevice(currentItem: FirebaseVisionLabel) {
-            itemView.setOnClickListener(View.OnClickListener {
-             //   itemView.itemName.text = "clicked"
-                val modifiedLabel = currentItem.label.replace(" ","_")
-                val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://en.wikipedia.org/wiki/"+modifiedLabel))
-                startActivity(context,i,null)
 
-            })
-            itemView.itemName.text = currentItem.label + "detected on device!"
+            itemView.itemName.text = currentItem.label + "detected on cloud"
             itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
-
     }
 
     fun setList(visionList: List<Any>) {
         firebaseVisionList = visionList
         notifyDataSetChanged()
     }
+
+
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val currentItem = firebaseVisionList[position]

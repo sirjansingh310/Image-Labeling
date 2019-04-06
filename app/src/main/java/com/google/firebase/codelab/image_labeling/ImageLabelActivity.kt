@@ -78,7 +78,7 @@ class ImageLabelActivity : BaseCameraActivity() {
         runOnUiThread {
             showPreview()
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-            // imagePreview.setImageBitmap(cameraKitImage.bitmap)
+            // imagePreview.setImageBitmap(cameraKitImage.bitmap) // hide image
         }
         cameraView.captureImage { cameraKitImage ->
             // Get the Bitmap from the captured shot

@@ -45,7 +45,7 @@ class ImageLabelAdapter(private var firebaseVisionList: List<Any>) : RecyclerVie
         }
 
         fun bindDevice(currentItem: FirebaseVisionLabel) {
-
+            // on-device
             itemView.itemName.text = currentItem.label + "detected on cloud"
             itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }

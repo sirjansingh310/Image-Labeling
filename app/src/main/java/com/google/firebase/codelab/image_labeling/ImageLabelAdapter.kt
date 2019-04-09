@@ -55,11 +55,14 @@ class ImageLabelAdapter(private var firebaseVisionList: List<Any>) : RecyclerVie
         fun bindCloud(currentItem: FirebaseVisionCloudLabel) {
             val isExpanded = HashMap<String,Boolean>(firebaseVisionList.size)
             itemView.setOnClickListener(View.OnClickListener {
+
                 if(isExpanded[currentItem.label] == false) {
-                    doAsyncResult {
-                        itemView.wikiInfo.text = extractInfo(currentItem.label)
+                    if(itemView.wikiInfo.text.equals("")) {
+                        doAsyncResult {
+                            itemView.wikiInfo.text = extractInfo(currentItem.label)
+                        }
+                        Thread.sleep(1500)
                     }
-                    Thread.sleep(1000)
                     itemView.wikiInfo.visibility = View.VISIBLE
                     itemView.wikiButton.visibility = View.VISIBLE
                         isExpanded[currentItem.label] = true
@@ -69,21 +72,23 @@ class ImageLabelAdapter(private var firebaseVisionList: List<Any>) : RecyclerVie
                             startActivity(context, i, null)
                     }
                 }
+
                 else{
                     itemView.wikiInfo.visibility = View.GONE
+
                     itemView.wikiButton.visibility = View.GONE
                     isExpanded[currentItem.label] = false
                 }
 
             })
             isExpanded[currentItem.label] = false
-            itemView.itemName.text = currentItem.label + "detected on cloud"
+            itemView.itemName.text = currentItem.label
             itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
 
         fun bindDevice(currentItem: FirebaseVisionLabel) {
             // on-device
-            itemView.itemName.text = currentItem.label + "detected on cloud"
+            itemView.itemName.text = currentItem.label
             itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
     }

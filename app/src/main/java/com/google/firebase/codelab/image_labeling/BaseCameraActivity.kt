@@ -18,8 +18,6 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         btnRetry.setOnClickListener {
             if (cameraView.visibility == View.VISIBLE) showPreview() else hidePreview()
-
-
         }
         fab_take_photo.setOnClickListener(this)
         sheetBehavior.peekHeight = 224
@@ -33,6 +31,11 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         cameraView.start()
+    }
+
+    override fun onBackPressed() {
+        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+
     }
 
     override fun onPause() {
@@ -50,4 +53,5 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
         framePreview.visibility = View.GONE
         cameraView.visibility = View.VISIBLE
     }
+
 }

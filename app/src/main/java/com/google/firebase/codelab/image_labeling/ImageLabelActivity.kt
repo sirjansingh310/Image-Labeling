@@ -75,15 +75,19 @@ class ImageLabelActivity : BaseCameraActivity() {
     override fun onClick(v: View?) {
         itemAdapter.setList(emptyList()) // reset the list when retry button is clicked
         progressBar.visibility = View.VISIBLE
-        runOnUiThread {
-            showPreview()
-            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-            // imagePreview.setImageBitmap(cameraKitImage.bitmap) // hide image
-        }
         cameraView.captureImage { cameraKitImage ->
             // Get the Bitmap from the captured shot
             runCloudImageLabeling(cameraKitImage.bitmap)
+            //imagePreview.setImageBitmap(cameraKitImage.bitmap) // hide image
+
         }
+        Thread.sleep(2000)
+        runOnUiThread {
+            showPreview()
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+
+        }
+
     }
 
 }
